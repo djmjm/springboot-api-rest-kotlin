@@ -26,8 +26,20 @@ class MathController {
 
     }
 
-    fun converToDouble(number: String?) : Double {
-        return number?.toDouble() ?: 1.0
+    private fun converToDouble(strNumber: String?) : Double {
+        if(strNumber.isNullOrBlank()) return 0.0
+        if(isNumeric(strNumber)) return 0.0
+
+        val number =
+            strNumber.replace(",".toRegex(),".")
+
+        return strNumber?.toDouble() ?: 1.0
+    }
+
+    private fun isNumeric(strNumber: String? ) : Boolean {
+        if(strNumber.isNullOrBlank()) return false
+        if(strNumber.matches( """[0-9]+""".toRegex() )) return false
+        return true
     }
 
 }
