@@ -1,9 +1,11 @@
 package br.com.example
 
+import br.com.example.exceptions.UnsuportedMathOperationException
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import java.lang.Exception
 import java.util.concurrent.atomic.AtomicLong
 
 @RestController
@@ -18,17 +20,24 @@ class MathController {
         @PathVariable (value="numberTwo")
         numberTwo : String?,
 
-    ): Double {
-        return (converToDouble( numberOne )
-               +
-               converToDouble( numberTwo )
-                )
+    ): Double{
+        try {
+            return (converToDouble(numberOne)
+                    +
+                    converToDouble(numberTwo)
+                    )
+        }
+        catch(ex : UnsuportedMathOperationException){
+            throw ex;
+        }
 
     }
 
     private fun converToDouble(strNumber: String?) : Double {
-        if(strNumber.isNullOrBlank()) return 0.0
-        if(isNumeric(strNumber)) return 0.0
+        if(strNumber.isNullOrBlank())
+            throw UnsuportedMathOperationException("Por favor, coloque um valor numérico")
+        if(isNumeric(strNumber))
+            throw UnsuportedMathOperationException("Por favor, coloque um valor numérico")
 
         val number =
             strNumber.replace(",".toRegex(),".")
