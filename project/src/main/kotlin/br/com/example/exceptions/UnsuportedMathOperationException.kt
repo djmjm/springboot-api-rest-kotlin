@@ -1,6 +1,5 @@
 package br.com.example.exceptions
 
-import java.lang.Exception
+import java.lang.*
 
-class UnsuportedMathOperationException ( exception: String? ):
-    RuntimeException(exception)
+class UnsuportedMathOperationException ( exception: String? ): RuntimeException(exception)

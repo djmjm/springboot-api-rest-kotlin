@@ -16,13 +16,13 @@ import kotlin.Exception
 @RestController
 class CustomizedResponseEntityExceptionHandler : ResponseEntityExceptionHandler(){
 
-    @ExceptionHandler(Exception::class)
+    @ExceptionHandler(java.lang.Exception::class)
     fun handleAllExceptions(ex: Exception, request: WebRequest) :
             ResponseEntity<ExceptionResponse> {
         val exceptioResponse = ExceptionResponse(
             Date(),
-            ex.message,
-            request.getDescription(false)
+            "not",
+            "false"
         )
         return ResponseEntity<ExceptionResponse>(exceptioResponse, HttpStatus.INTERNAL_SERVER_ERROR)
     }
@@ -32,8 +32,8 @@ class CustomizedResponseEntityExceptionHandler : ResponseEntityExceptionHandler(
             ResponseEntity<ExceptionResponse> {
         val exceptioResponse = ExceptionResponse(
             Date(),
-            ex.message,
-            request.getDescription(false)
+            "Not",
+            "false"
         )
         return ResponseEntity<ExceptionResponse>(exceptioResponse, HttpStatus.BAD_REQUEST)
     }
