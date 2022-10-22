@@ -1,6 +1,5 @@
 package br.com.example
 
-import br.com.erudio.exceptions.CustomizedResponseEntityExceptionHandler
 import br.com.example.exceptions.ExceptionResponse
 import br.com.example.exceptions.UnsuportedMathOperationException
 import org.springframework.http.HttpStatus
